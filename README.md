@@ -14,7 +14,7 @@ This is the application open source page. For detailed information, please go to
 
 2. 解壓縮 | Unzip
 
-3. 打開 FlexNote.exe | Open FlexNoteEN.exe
+3. 前往Release資料夾 -> 打開 FlexNote.exe | Go to release folder and open FlexNoteEN.exe
 
 4. 盡情使用! | Enjoy!
 
