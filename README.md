@@ -28,6 +28,11 @@ This is the application open source page. For detailed information, please go to
 
 ![Screenshot4](https://york9675.github.io/flexnote/feature1_en.png)
 
+## 問題回報 | Bug Report
+如在使用此程式時遇到任何問題，請至[issues頁面](https://github.com/york9675/flexnote-app/issues)回報
+
+If you found any problems when using this app, please report it at [Issues Page](https://github.com/york9675/flexnote-app/issues).
+
 # 貢獻 | Contribute
 請直接Fork並開始改程式碼，改好後建Pull Request，我審核過就可以了喔!
 
