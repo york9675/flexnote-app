@@ -1,11 +1,15 @@
 import tkinter as tk
 import tkinter.font as tkFont
 from tkinter import scrolledtext, filedialog, messagebox, ttk
+from tkinter.colorchooser import askcolor
 import os
 import traceback
 import webbrowser
 
-class FlexNoteApp:
+version = '1.1'
+lastupdate = '2024/02/07'
+
+class FlexNote:
     def __init__(self, root):
         try:
             self.root = root
@@ -54,10 +58,16 @@ class FlexNoteApp:
             edit_menu.add_separator()
             edit_menu.add_command(label="全選", command=lambda: self.text_area.event_generate("<<SelectAll>>"), accelerator="Ctrl+A")
 
-            help_menu.add_command(label="幫助", command=self.help)
-            help_menu.add_command(label="GitHub", command=self.open_github)
+            help_menu.add_command(label="幫助", command=self.help, accelerator="F1")
+            help_menu.add_separator()
+            help_menu.add_command(label="官方網站", command=lambda: webbrowser.open("https://york9675.github.io/flexnote/"))
+            help_menu.add_command(label="GitHub", command=lambda: webbrowser.open("https://www.github.com/york9675/flexnote-app"))
             help_menu.add_separator()
             help_menu.add_command(label="關於", command=self.about)
+            help_menu.add_command(label="贊助作者", command=lambda: webbrowser.open("https://www.buymeacoffee.com/york0524"))
+            help_menu.add_separator()
+            help_menu.add_command(label=f"FlexNote Free", state=tk.DISABLED)
+            help_menu.add_command(label=f"版本 {version}", state=tk.DISABLED)
 
             view_menu_zoom = tk.Menu(view_menu, tearoff=0)
             view_menu.add_cascade(label="縮放", menu=view_menu_zoom)
@@ -83,6 +93,8 @@ class FlexNoteApp:
             for font_name in system_fonts:
                 system_fonts_menu.add_radiobutton(label=font_name, variable=self.selected_font, command=self.change_font)
 
+            view_menu.add_command(label="更換背景顏色", command=self.change_background_color)
+
             self.show_status_bar = tk.BooleanVar(value=True)
             view_menu.add_checkbutton(label="顯示狀態列", variable=self.show_status_bar, command=self.toggle_status_bar)
 
@@ -93,6 +105,7 @@ class FlexNoteApp:
             root.bind("<Control-plus>", lambda event=None: self.zoom(event, direction="in"))
             root.bind("<Control-minus>", lambda event=None: self.zoom(event, direction="out"))
             root.bind("<Control-0>", lambda event=None: self.reset_zoom())
+            root.bind("<F1>", lambda event=None: self.help())
 
             self.text_area.bind("<KeyRelease>", self.update_character_count)
 
@@ -100,7 +113,7 @@ class FlexNoteApp:
             self.sizegrip.pack(side=tk.RIGHT, anchor=tk.SE)
             self.update_sizegrip_visibility()
 
-            self.product_label = tk.Label(root, text=" FlexNote V 1.0 ", bd=1, relief=tk.SUNKEN, anchor=tk.E)
+            self.product_label = tk.Label(root, text= f" FlexNote V {version} ", bd=1, relief=tk.SUNKEN, anchor=tk.E)
             self.product_label.pack(side=tk.RIGHT)
 
             self.status_bar = tk.Label(root, text="字元數: 0 | 縮放比例: 100%", bd=1, relief=tk.SUNKEN, anchor=tk.W)
@@ -242,16 +255,10 @@ class FlexNoteApp:
             self.root.destroy()
 
     def help(self):
-        messagebox.showinfo("幫助", "這是一個簡單的記事本程式，你可以使用它來寫一些簡單的文字檔。\n\n以下為快捷鍵的介紹，可用於提升使用便捷性:\n1.   新建記事本: Ctrl+N\n2.   開啟文字檔: Ctrl+O\n3.   儲存文字檔: Ctrl+S\n4.   放大: Ctrl+加號 / 滑鼠滾輪往前\n5.   縮小: Ctrl+減號 / 滑鼠滾輪往後\n6.   重設縮放比例: Ctrl+0\n7.   剪下: Ctrl+X\n8.   複製: Ctrl+C\n9.   貼上: Ctrl+V\n10. 刪除: Del\n11. 全選: Ctrl+A\n12. 復原: Ctrl+Z\n13. 重作: Ctrl+Y\n\n您也可以透過檢視選單裡面的字體選項自訂您要顯示的字體!")
-
-    def open_github(self):
-        try:
-            webbrowser.open("https://www.github.com/york9675/flexnote-app")
-        except Exception as e:
-            messagebox.showerror("錯誤", f"在嘗試開啟GitHub頁面時發生以下錯誤:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
+        messagebox.showinfo("幫助", "這是一個簡單的記事本程式，你可以使用它來寫一些簡單的文字檔。\n\n以下為快捷鍵的介紹，可用於提升使用便捷性:\n1.   新建記事本: Ctrl+N\n2.   開啟文字檔: Ctrl+O\n3.   儲存文字檔: Ctrl+S\n4.   放大: Ctrl+加號 / 滑鼠滾輪往前\n5.   縮小: Ctrl+減號 / 滑鼠滾輪往後\n6.   重設縮放比例: Ctrl+0\n7.   剪下: Ctrl+X\n8.   複製: Ctrl+C\n9.   貼上: Ctrl+V\n10. 刪除: Del\n11. 全選: Ctrl+A\n12. 復原: Ctrl+Z\n13. 重作: Ctrl+Y\n\n若要更改背景顏色，請前往檢視選單並點選更換背景顏色\n您也可以透過檢視選單裡面的字體選項自訂您要顯示的字體!")
 
     def about(self):
-        messagebox.showinfo("關於FlexNote", "一個非常簡單的記事本程式，簡單易使用，沒有其他複雜功能。\n\nFlexNote Free\n版本: 1.0\n最後更新: 2024/02/06\n\n作者: York\n\n使用上有任何問題請至GitHub的issue頁面回報:\nhttps://github.com/york9675/flexnote-app/issues\n\n也可透過以下方式聯繫作者:\nDiscord: york0524")
+        messagebox.showinfo("關於FlexNote", f"一個非常簡單的記事本程式，簡單易使用，沒有其他複雜功能。\n\nFlexNote Free\n版本: {version}\n最後更新: {lastupdate}\n\n作者: York\n\n使用上有任何問題請至GitHub的issue頁面回報:\nhttps://github.com/york9675/flexnote-app/issues\n\n也可透過以下方式聯繫作者:\nDiscord: york0524")
 
     def zoom(self, event, direction=None):
         try:
@@ -275,7 +282,7 @@ class FlexNoteApp:
 
             self.status_bar.config(text=f"字元數: {character_count} | 縮放比例: {zoom_level}%")
         except Exception as e:
-            messagebox.showerror("錯誤", f"在嘗試縮放時發生以下錯誤:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
+            messagebox.showerror("錯誤", f"在嘗試縮放時發生以下錯誤，無法保證相容所有字體，請嘗試更換為其他字體:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
 
     def reset_zoom(self):
         try:
@@ -286,7 +293,7 @@ class FlexNoteApp:
 
             self.status_bar.config(text=f"字元數: {character_count} | 縮放比例: 100%")
         except Exception as e:
-            messagebox.showerror("錯誤", f"在嘗試重設縮放時發生以下錯誤:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
+            messagebox.showerror("錯誤", f"在嘗試重設縮放時發生以下錯誤，無法保證相容所有字體，請嘗試更換為其他字體:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
 
     def toggle_status_bar(self):
         try:
@@ -347,13 +354,29 @@ class FlexNoteApp:
 
             self.root.geometry(f"{window_width}x{window_height}")
         except Exception as e:
-            messagebox.showerror("錯誤", f"在嘗試更改字體時發生以下錯誤:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
+            messagebox.showerror("錯誤", f"在嘗試更改字體時發生以下錯誤，無法保證相容所有字體，請嘗試更換為其他字體:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
+
+    def is_dark_color(self, color):
+        r, g, b = int(color[1:3], 16), int(color[3:5], 16), int(color[5:7], 16)
+        brightness = (r * 299 + g * 587 + b * 114) / 1000
+        return brightness < 128
+        
+    def change_background_color(self):
+        try:
+            color = askcolor(title="選擇背景顏色")[1]
+            if color:
+                self.text_area.configure(bg=color)
+
+                text_color = "white" if self.is_dark_color(color) else "black"
+                self.text_area.configure(fg=text_color)
+        except Exception as e:
+            messagebox.showerror("錯誤", f"在嘗試更換背景顏色時發生以下錯誤:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
 
 if __name__ == "__main__":
     try:
         root = tk.Tk()
-        app = FlexNoteApp(root)
+        app = FlexNote(root)
         root.mainloop()
     except Exception as e:
-        messagebox.showerror("錯誤", f"發生以下錯誤，將在按下確定後自動退出程式:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
+        messagebox.showerror("錯誤", f"執行階段發生以下錯誤，將在按下確定後自動退出程式:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
         root.destroy()

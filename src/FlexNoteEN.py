@@ -1,11 +1,15 @@
 import tkinter as tk
 import tkinter.font as tkFont
 from tkinter import scrolledtext, filedialog, messagebox, ttk
+from tkinter.colorchooser import askcolor
 import os
 import traceback
 import webbrowser
 
-class FlexNoteApp:
+version = '1.1'
+lastupdate = '2024/02/07'
+
+class FlexNoteEN:
     def __init__(self, root):
         try:
             self.root = root
@@ -54,10 +58,16 @@ class FlexNoteApp:
             edit_menu.add_separator()
             edit_menu.add_command(label="Select All", command=lambda: self.text_area.event_generate("<<SelectAll>>"), accelerator="Ctrl+A")
 
-            help_menu.add_command(label="Help", command=self.help)
-            help_menu.add_command(label="GitHub", command=self.open_github)
+            help_menu.add_command(label="Help", command=self.help, accelerator="F1")
+            help_menu.add_separator()
+            help_menu.add_command(label="Website", command=lambda: webbrowser.open("https://york9675.github.io/flexnote/english"))
+            help_menu.add_command(label="GitHub", command=lambda: webbrowser.open("https://www.github.com/york9675/flexnote-app"))
             help_menu.add_separator()
             help_menu.add_command(label="About", command=self.about)
+            help_menu.add_command(label="Support Developer", command=lambda: webbrowser.open("https://www.buymeacoffee.com/york0524"))
+            help_menu.add_separator()
+            help_menu.add_command(label=f"FlexNote Free", state=tk.DISABLED)
+            help_menu.add_command(label=f"Version {version}", state=tk.DISABLED)
 
             view_menu_zoom = tk.Menu(view_menu, tearoff=0)
             view_menu.add_cascade(label="Zoom", menu=view_menu_zoom)
@@ -83,6 +93,8 @@ class FlexNoteApp:
             for font_name in system_fonts:
                 system_fonts_menu.add_radiobutton(label=font_name, variable=self.selected_font, command=self.change_font)
 
+            view_menu.add_command(label="Background Color", command=self.change_background_color)
+
             self.show_status_bar = tk.BooleanVar(value=True)
             view_menu.add_checkbutton(label="Show Ststus Bar", variable=self.show_status_bar, command=self.toggle_status_bar)
 
@@ -93,6 +105,7 @@ class FlexNoteApp:
             root.bind("<Control-plus>", lambda event=None: self.zoom(event, direction="in"))
             root.bind("<Control-minus>", lambda event=None: self.zoom(event, direction="out"))
             root.bind("<Control-0>", lambda event=None: self.reset_zoom())
+            root.bind("<F1>", lambda event=None: self.help())
 
             self.text_area.bind("<KeyRelease>", self.update_character_count)
 
@@ -100,7 +113,7 @@ class FlexNoteApp:
             self.sizegrip.pack(side=tk.RIGHT, anchor=tk.SE)
             self.update_sizegrip_visibility()
 
-            self.product_label = tk.Label(root, text=" FlexNote V 1.0 ", bd=1, relief=tk.SUNKEN, anchor=tk.E)
+            self.product_label = tk.Label(root, text=f" FlexNote V {version} ", bd=1, relief=tk.SUNKEN, anchor=tk.E)
             self.product_label.pack(side=tk.RIGHT)
 
             self.status_bar = tk.Label(root, text="Character count: 0 | Zoom: 100%", bd=1, relief=tk.SUNKEN, anchor=tk.W)
@@ -241,17 +254,11 @@ class FlexNoteApp:
             messagebox.showerror("Error", f"The following error occurred while trying to close the program:\n{str(e)}\n\nDetails:\n{traceback.format_exc()}")
             self.root.destroy()
 
-    def open_github(self):
-        try:
-            webbrowser.open("https://www.github.com/york9675/flexnote-app")
-        except Exception as e:
-            messagebox.showerror("Error", f"The following error occurred while trying to open the GitHub page:\n{str(e)}\n\nDetails:\n{traceback.format_exc()}")
-
     def help(self):
         messagebox.showinfo("Help", "This is a simple notepad program, you can use it to write some simple text files.\n\nThe following is an introduction to shortcut keys, which can be used to improve ease of use:\n1 . Create new notepad: Ctrl+N\n2. Open text file: Ctrl+O\n3. Save text file: Ctrl+S\n4. Zoom in: Ctrl+plus sign/mouse wheel forward\n5. Zoom out: Ctrl+minus sign / Mouse wheel back\n6. Reset zoom: Ctrl+0\n7. Cut: Ctrl+X\n8. Copy: Ctrl+C\n9. Paste: Ctrl+V\n10. Delete: Del\n11. Select all: Ctrl+A\n12. Undo: Ctrl+Z\n13. Redo: Ctrl+Y\n\nYou can also customize the font you want to display through the font options in the view menu!")
 
     def about(self):
-        messagebox.showinfo("About FlexNote", "A very simple notepad program, easy to use with no other complicated features.\n\nFlexNote Free\nVersion: 1.0\nLast update: 2024/02/06\n\nDeveloper: York\nTranslated by: York\n\nIf you have any problems during use, please report it to the GitHub issue page:\nhttps://github.com/york9675/flexnote-app/issues\n\nYou can also contact the author through the following methods:\nDiscord: york0524")
+        messagebox.showinfo("About FlexNote", f"A very simple notepad program, easy to use with no other complicated features.\n\nFlexNote Free\nVersion: {version}\nLast update: {lastupdate}\n\nDeveloper: York\nTranslated by: York\n\nIf you have any problems during use, please report it to the GitHub issue page:\nhttps://github.com/york9675/flexnote-app/issues\n\nYou can also contact the author through the following methods:\nDiscord: york0524")
 
     def zoom(self, event, direction=None):
         try:
@@ -349,10 +356,26 @@ class FlexNoteApp:
         except Exception as e:
             messagebox.showerror("Error", f"The following error occurred while trying to change the font:\n{str(e)}\n\nDetails:\n{traceback.format_exc()}")
 
+    def is_dark_color(self, color):
+        r, g, b = int(color[1:3], 16), int(color[3:5], 16), int(color[5:7], 16)
+        brightness = (r * 299 + g * 587 + b * 114) / 1000
+        return brightness < 128
+        
+    def change_background_color(self):
+        try:
+            color = askcolor(title="選擇背景顏色")[1]
+            if color:
+                self.text_area.configure(bg=color)
+
+                text_color = "white" if self.is_dark_color(color) else "black"
+                self.text_area.configure(fg=text_color)
+        except Exception as e:
+            messagebox.showerror("錯誤", f"在嘗試更換背景顏色時發生以下錯誤:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
+
 if __name__ == "__main__":
     try:
         root = tk.Tk()
-        app = FlexNoteApp(root)
+        app = FlexNoteEN(root)
         root.mainloop()
     except Exception as e:
         messagebox.showerror("Error", f"An error occurs, the program will automatically exit after pressing OK.\n\nThe following error occurred:\n{str(e)}\n\nDetails:\n{traceback.format_exc()}")
