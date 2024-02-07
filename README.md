@@ -20,15 +20,17 @@ This is the application open source page. For detailed information, please go to
 
 # 螢幕擷取畫面 | Screenshots
 
+## 繁體中文
 ![Screenshot1](https://york9675.github.io/flexnote/screenshot.png)
 
 ![Screenshot2](https://york9675.github.io/flexnote/feature1.png)
 
+## English
 ![Screenshot3](https://york9675.github.io/flexnote/screenshot_en.png)
 
 ![Screenshot4](https://york9675.github.io/flexnote/feature1_en.png)
 
-## 問題回報 | Bug Report
+# 問題回報 | Bug Report
 如在使用此程式時遇到任何問題，請至[issues頁面](https://github.com/york9675/flexnote-app/issues)回報
 
 If you found any problems when using this app, please report it at [Issues Page](https://github.com/york9675/flexnote-app/issues).
