@@ -6,7 +6,7 @@ A very simple notepad program, easy to use with no other complicated features.
 # 介紹 | Introduction
 此為應用程式開源頁面，詳細介紹請前往[介紹網站](https://york9675.github.io/flexnote/)。
 
-This is the application open source page. For detailed information, please go to the [introduction website](https://york9675.github.io/flexnote/).
+This is the application open source page. For detailed information, please go to the [introduction website](https://york9675.github.io/flexnote/english).
 
 # 安裝步驟 | Installation
 
