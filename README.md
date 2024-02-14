@@ -10,13 +10,62 @@ This is the application open source page. For detailed information, please go to
 
 # 安裝步驟 | Installation
 
+## Windows (8.1以上 | 8.1 and above)
+
 1. [下載 | Download](https://github.com/york9675/flexnote-app/releases/latest)
 
 2. 解壓縮 | Unzip
 
-3. 前往Release資料夾 -> 打開 FlexNote.exe | Go to release folder and open FlexNoteEN.exe
+3. 前往Release資料夾 -> 打開 `FlexNote.exe` | Go to release folder and open `FlexNoteEN.exe`
 
 4. 盡情使用! | Enjoy!
+
+##  Linux (使用GUI | With the GUI)
+1. [下載 | Download](https://github.com/york9675/flexnote-app/releases/latest)
+
+2. 解壓縮 | Unzip
+
+3. 前往Release資料夾 -> 找到 `FlexNote_for_Linux.AppImage` 檔案 | Go to Release folder and find `FlexNote_for_Linux_EN.AppImage` file
+
+4. 對該檔案按下右鍵叫出選單 | Right-click on the file and 
+
+5. 點選"屬性" | Click the ‘Properties’ entry
+
+6. 前往"屬性"視窗中的"權限"分頁 | Switch to the Permissions tab and
+
+7. 如果您使用的是基於Nautilus 的檔案管理器（Files、Nemo、Caja），請按一下「允許檔案作為程式執行」勾選框；如果您使用的是Dolphin，請按一下「可執行」勾選框；如果您使用 PCManFM，請更改「執行」下拉式選單至「任何人」 | Click the ‘Allow executing file as program’ checkbox if you are using a Nautilus-based file manager (Files, Nemo, Caja), or click the ‘Is executable’ checkbox if you are using Dolphin, or change the ‘Execute’ drop down list to ‘Anyone’ if you are using PCManFM
+
+8. 關閉"屬性"視窗 | Close the dialog
+
+9. 直接雙擊開啟 `FlexNote_for_Linux.AppImage` | Double-click on the `FlexNote_for_Linux_EN.AppImage` file to run
+
+10. 盡情使用! | Enjoy!
+
+![Installation Instructions](https://global.discourse-cdn.com/standard10/uploads/appimage/optimized/1X/a4889c5cb8711d6845b58135080787d2f370af35_2_500x500.gif)
+
+(The above teaching and GIF installation instructions are referenced from the [AppImage Discourse](https://discourse.appimage.org/t/how-to-run-an-appimage))
+
+## Linux (使用指令 | On the command line)
+
+1. [下載 | Download](https://github.com/york9675/flexnote-app/releases/latest)
+
+2. 解壓縮 | Unzip
+
+3. 前往Release資料夾 | Go to Release folder
+
+4. 在該位置開啟終端機並輸入以下命令 | Open a terminal at this location and enter the following command
+
+```bash
+# 繁體中文用戶請輸入
+chmod a+x FlexNote_for_Linux.AppImage
+
+# If you are English user:
+chmod a+x FlexNote_for_Linux_EN.AppImage
+```
+
+5. 直接雙擊開啟 `FlexNote_for_Linux.AppImage` | Double-click on the `FlexNote_for_Linux_EN.AppImage` file to run
+
+6. 盡情使用! | Enjoy!
 
 # 螢幕擷取畫面 | Screenshots
 
