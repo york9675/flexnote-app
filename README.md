@@ -8,38 +8,40 @@ A very simple notepad program, easy to use with no other complicated features.
 
 This is the application open source page. For detailed information, please go to the [introduction website](https://york9675.github.io/flexnote/english).
 
+# ⚠️請注意 | Note⚠️
+
+**若您的防毒軟體或下載器等說此軟體可能存在風險等訊息，請忽略並放心地保留此程式。此程式絕無任何不安全或是有病毒的地方，你可以在原始碼中看到。謝謝使用!**
+
+**If your anti-virus software or downloader says that this program may be risky, please ignore it and keep this program with confidence. There is absolutely nothing unsafe or virusy about this program, as you can see in the source code. Thanks for using it!**
+
 # 安裝步驟 | Installation
 
 ## Windows (8.1以上 | 8.1 and above)
 
 1. [下載 | Download](https://github.com/york9675/flexnote-app/releases/latest)
 
-2. 解壓縮 | Unzip
+2. 打開 `FlexNote.exe` | Open `FlexNoteEN.exe`
 
-3. 前往Release資料夾 -> 打開 `FlexNote.exe` | Go to release folder and open `FlexNoteEN.exe`
-
-4. 盡情使用! | Enjoy!
+3. 盡情使用! | Enjoy!
 
 ##  Linux (使用GUI | With the GUI)
 1. [下載 | Download](https://github.com/york9675/flexnote-app/releases/latest)
 
-2. 解壓縮 | Unzip
+2. 前往您的下載資料夾 -> 找到 `FlexNote_for_Linux.AppImage` 檔案 | Go to your Download folder and find `FlexNote_for_Linux_EN.AppImage` file
 
-3. 前往Release資料夾 -> 找到 `FlexNote_for_Linux.AppImage` 檔案 | Go to Release folder and find `FlexNote_for_Linux_EN.AppImage` file
+3. 對該檔案按下右鍵叫出選單 | Right-click on the file and 
 
-4. 對該檔案按下右鍵叫出選單 | Right-click on the file and 
+4. 點選"屬性" | Click the ‘Properties’ entry
 
-5. 點選"屬性" | Click the ‘Properties’ entry
+5. 前往"屬性"視窗中的"權限"分頁 | Switch to the Permissions tab and
 
-6. 前往"屬性"視窗中的"權限"分頁 | Switch to the Permissions tab and
+6. 如果您使用的是基於Nautilus 的檔案管理器（Files、Nemo、Caja），請按一下「允許檔案作為程式執行」勾選框；如果您使用的是Dolphin，請按一下「可執行」勾選框；如果您使用 PCManFM，請更改「執行」下拉式選單至「任何人」 | Click the ‘Allow executing file as program’ checkbox if you are using a Nautilus-based file manager (Files, Nemo, Caja), or click the ‘Is executable’ checkbox if you are using Dolphin, or change the ‘Execute’ drop down list to ‘Anyone’ if you are using PCManFM
 
-7. 如果您使用的是基於Nautilus 的檔案管理器（Files、Nemo、Caja），請按一下「允許檔案作為程式執行」勾選框；如果您使用的是Dolphin，請按一下「可執行」勾選框；如果您使用 PCManFM，請更改「執行」下拉式選單至「任何人」 | Click the ‘Allow executing file as program’ checkbox if you are using a Nautilus-based file manager (Files, Nemo, Caja), or click the ‘Is executable’ checkbox if you are using Dolphin, or change the ‘Execute’ drop down list to ‘Anyone’ if you are using PCManFM
+7. 關閉"屬性"視窗 | Close the dialog
 
-8. 關閉"屬性"視窗 | Close the dialog
+8. 直接雙擊開啟 `FlexNote_for_Linux.AppImage` | Double-click on the `FlexNote_for_Linux_EN.AppImage` file to run
 
-9. 直接雙擊開啟 `FlexNote_for_Linux.AppImage` | Double-click on the `FlexNote_for_Linux_EN.AppImage` file to run
-
-10. 盡情使用! | Enjoy!
+9. 盡情使用! | Enjoy!
 
 ![Installation Instructions](https://global.discourse-cdn.com/standard10/uploads/appimage/optimized/1X/a4889c5cb8711d6845b58135080787d2f370af35_2_500x500.gif)
 
@@ -49,23 +51,23 @@ This is the application open source page. For detailed information, please go to
 
 1. [下載 | Download](https://github.com/york9675/flexnote-app/releases/latest)
 
-2. 解壓縮 | Unzip
+2. 前往您的下載資料夾 | Go to your Download folder
 
-3. 前往Release資料夾 | Go to Release folder
-
-4. 在該位置開啟終端機並輸入以下命令 | Open a terminal at this location and enter the following command
+3. 在該位置開啟終端機並輸入以下命令 | Open a terminal at this location and enter the following command
 
 ```bash
-# 繁體中文用戶請輸入
+# 若您下載繁體中文版本:
 chmod a+x FlexNote_for_Linux.AppImage
+```
 
-# If you are English user:
+```bash
+# If you downloaded English version:
 chmod a+x FlexNote_for_Linux_EN.AppImage
 ```
 
-5. 直接雙擊開啟 `FlexNote_for_Linux.AppImage` | Double-click on the `FlexNote_for_Linux_EN.AppImage` file to run
+4. 直接雙擊開啟 `FlexNote_for_Linux.AppImage` | Double-click on the `FlexNote_for_Linux_EN.AppImage` file to run
 
-6. 盡情使用! | Enjoy!
+5. 盡情使用! | Enjoy!
 
 # 螢幕擷取畫面 | Screenshots
 
@@ -78,6 +80,9 @@ chmod a+x FlexNote_for_Linux_EN.AppImage
 ![Screenshot3](https://york9675.github.io/flexnote/screenshot_en.png)
 
 ![Screenshot4](https://york9675.github.io/flexnote/feature1_en.png)
+
+## Linux
+![linux_screnshot](https://github.com/york9675/flexnote-app/assets/84720688/73c98632-a373-4f4c-a258-a66e02bf2408)
 
 # 問題回報 | Bug Report
 如在使用此程式時遇到任何問題，請至[issues頁面](https://github.com/york9675/flexnote-app/issues)回報
