@@ -10,9 +10,13 @@ This is the application open source page. For detailed information, please go to
 
 # ⚠️請注意 | Note⚠️
 
-**若您的防毒軟體或下載器等說此軟體可能存在風險等訊息，請忽略並放心地保留此程式。此程式絕無任何不安全或是有病毒的地方，你可以在原始碼中看到。謝謝使用!**
+**1. 若您的防毒軟體或下載器等說此軟體可能存在風險等訊息，請忽略並放心地保留此程式。此程式絕無任何不安全或是有病毒的地方，你可以在原始碼中看到。謝謝使用!**
 
-**If your anti-virus software or downloader says that this program may be risky, please ignore it and keep this program with confidence. There is absolutely nothing unsafe or virusy about this program, as you can see in the source code. Thanks for using it!**
+**2. `v1.2` 版本暫未支援英文及Linux版本，如有需要請先使用 [v1.1-linux](https://github.com/york9675/flexnote-app/releases/tag/v1.1-linux) 版本。 (英文及Linux版本將在稍晚釋出，造成不便深感抱歉)**
+
+**1. If your anti-virus software or downloader says that this program may be risky, please ignore it and keep this program with confidence. There is absolutely nothing unsafe or virusy about this program, as you can see in the source code. Thanks for using it!**
+
+**2. `v1.2` version does not currently support English and Linux versions. If necessary, please use [v1.1-linux](https://github.com/york9675/flexnote-app/releases/tag/v1.1-linux) version. (English and Linux versions will be released later, we apologize for the inconvenience)**
 
 # 安裝步驟 | Installation
 

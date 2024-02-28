@@ -5,9 +5,10 @@ from tkinter.colorchooser import askcolor
 import os
 import traceback
 import webbrowser
+import requests
 
-version = '1.1'
-lastupdate = '2024/02/07'
+version = 'v1.2'
+lastupdate = '2024/02/18'
 
 class FlexNote:
     def __init__(self, root):
@@ -32,6 +33,16 @@ class FlexNote:
 
             menu_bar = tk.Menu(root)
             root.config(menu=menu_bar)
+
+            self.context_menu = tk.Menu(root, tearoff=0)
+            self.context_menu.add_command(label="剪下", command=lambda: self.text_area.event_generate("<<Cut>>"), accelerator="Ctrl+X")
+            self.context_menu.add_command(label="複製", command=lambda: self.text_area.event_generate("<<Copy>>"), accelerator="Ctrl+C")
+            self.context_menu.add_command(label="貼上", command=lambda: self.text_area.event_generate("<<Paste>>"), accelerator="Ctrl+V")
+            self.context_menu.add_command(label="刪除", command=lambda: self.text_area.event_generate("<Delete>"), accelerator="Del")
+            self.context_menu.add_separator()
+            self.context_menu.add_command(label="全選", command=lambda: self.text_area.event_generate("<<SelectAll>>"), accelerator="Ctrl+A")
+
+            self.text_area.bind("<Button-3>", self.show_context_menu)
 
             file_menu = tk.Menu(menu_bar, tearoff=0)
             edit_menu = tk.Menu(menu_bar, tearoff=0)
@@ -66,6 +77,7 @@ class FlexNote:
             help_menu.add_command(label="關於", command=self.about)
             help_menu.add_command(label="贊助作者", command=lambda: webbrowser.open("https://www.buymeacoffee.com/york0524"))
             help_menu.add_separator()
+            help_menu.add_command(label="檢查更新", command=self.check_for_updates)
             help_menu.add_command(label=f"FlexNote Free", state=tk.DISABLED)
             help_menu.add_command(label=f"版本 {version}", state=tk.DISABLED)
 
@@ -113,7 +125,7 @@ class FlexNote:
             self.sizegrip.pack(side=tk.RIGHT, anchor=tk.SE)
             self.update_sizegrip_visibility()
 
-            self.product_label = tk.Label(root, text= f" FlexNote V {version} ", bd=1, relief=tk.SUNKEN, anchor=tk.E)
+            self.product_label = tk.Label(root, text= f" FlexNote {version} ", bd=1, relief=tk.SUNKEN, anchor=tk.E)
             self.product_label.pack(side=tk.RIGHT)
 
             self.status_bar = tk.Label(root, text="字元數: 0 | 縮放比例: 100%", bd=1, relief=tk.SUNKEN, anchor=tk.W)
@@ -126,6 +138,28 @@ class FlexNote:
             messagebox.showerror("錯誤", f"初始化過程中發生錯誤，將在按下確定後自動退出程式。\n\n發生以下錯誤:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
             self.root.destroy()
 
+    def check_for_updates(self):
+        try:
+            repo_url = "https://api.github.com/repos/york9675/flexnote-app/releases/latest"
+
+            response = requests.get(repo_url)
+
+            if response.status_code == 200:
+                data = response.json()
+
+                latest_version = data.get("tag_name", "unknown")
+
+                if latest_version != version:
+                    response = messagebox.askyesno("軟體更新", f"發現新版本 {latest_version}，是否要前往下載？")
+
+                    if response == tk.YES:
+                        webbrowser.open("https://github.com/york9675/flexnote-app/releases")
+                else:
+                    messagebox.showinfo("軟體更新", "你使用的已是最新版本!")
+
+        except Exception as e:
+            messagebox.showerror("錯誤", f"在檢查更新時發生錯誤，請檢察網路連線後再試一次")
+
     def undo(self, event=None):
         try:
             self.text_area.edit_undo()
@@ -137,6 +171,9 @@ class FlexNote:
             self.text_area.edit_redo()
         except Exception as e:
             messagebox.showerror("錯誤", f"在嘗試重做時發生以下錯誤:\n{str(e)}\n\n詳細資料:\n{traceback.format_exc()}")
+
+    def show_context_menu(self, event):
+        self.context_menu.post(event.x_root, event.y_root)
 
     def update_character_count(self, event):
         try:
